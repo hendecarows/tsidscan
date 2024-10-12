@@ -1,0 +1,416 @@
+[
+    {
+        "transponder": "BS1",
+        "number": 1,
+        "frequency_idx": 0,
+        "frequency_khz": 11727480,
+        "frequency_if_khz": 1049480,
+        "transport_stream_id": [
+            16400,
+            16401,
+            16402,
+            65535,
+            65535,
+            65535,
+            65535,
+            65535
+        ],
+        "has_lock": true
+    },
+    {
+        "transponder": "BS3",
+        "number": 3,
+        "frequency_idx": 1,
+        "frequency_khz": 11765840,
+        "frequency_if_khz": 1087840,
+        "transport_stream_id": [
+            16432,
+            17969,
+            17970,
+            65535,
+            65535,
+            65535,
+            65535,
+            65535
+        ],
+        "has_lock": true
+    },
+    {
+        "transponder": "BS5",
+        "number": 5,
+        "frequency_idx": 2,
+        "frequency_khz": 11804200,
+        "frequency_if_khz": 1126200,
+        "transport_stream_id": [
+            17488,
+            17489,
+            65535,
+            65535,
+            65535,
+            65535,
+            65535,
+            65535
+        ],
+        "has_lock": true
+    },
+    {
+        "transponder": "BS7",
+        "number": 7,
+        "frequency_idx": 3,
+        "frequency_khz": 11842560,
+        "frequency_if_khz": 1164560,
+        "transport_stream_id": [],
+        "has_lock": false
+    },
+    {
+        "transponder": "BS9",
+        "number": 9,
+        "frequency_idx": 4,
+        "frequency_khz": 11880920,
+        "frequency_if_khz": 1202920,
+        "transport_stream_id": [
+            16528,
+            16529,
+            16530,
+            65535,
+            65535,
+            65535,
+            65535,
+            65535
+        ],
+        "has_lock": true
+    },
+    {
+        "transponder": "BS11",
+        "number": 11,
+        "frequency_idx": 5,
+        "frequency_khz": 11919280,
+        "frequency_if_khz": 1241280,
+        "transport_stream_id": [
+            18098,
+            18099,
+            65535,
+            65535,
+            65535,
+            65535,
+            65535,
+            65535
+        ],
+        "has_lock": true
+    },
+    {
+        "transponder": "BS13",
+        "number": 13,
+        "frequency_idx": 6,
+        "frequency_khz": 11957640,
+        "frequency_if_khz": 1279640,
+        "transport_stream_id": [
+            16592,
+            16593,
+            18130,
+            65535,
+            65535,
+            65535,
+            65535,
+            65535
+        ],
+        "has_lock": true
+    },
+    {
+        "transponder": "BS15",
+        "number": 15,
+        "frequency_idx": 7,
+        "frequency_khz": 11996000,
+        "frequency_if_khz": 1318000,
+        "transport_stream_id": [
+            16625,
+            16626,
+            65535,
+            65535,
+            65535,
+            65535,
+            65535,
+            65535
+        ],
+        "has_lock": true
+    },
+    {
+        "transponder": "BS17",
+        "number": 17,
+        "frequency_idx": 8,
+        "frequency_khz": 12034360,
+        "frequency_if_khz": 1356360,
+        "transport_stream_id": [],
+        "has_lock": false
+    },
+    {
+        "transponder": "BS19",
+        "number": 19,
+        "frequency_idx": 9,
+        "frequency_khz": 12072720,
+        "frequency_if_khz": 1394720,
+        "transport_stream_id": [
+            18224,
+            18225,
+            18226,
+            18227,
+            65535,
+            65535,
+            65535,
+            65535
+        ],
+        "has_lock": true
+    },
+    {
+        "transponder": "BS21",
+        "number": 21,
+        "frequency_idx": 10,
+        "frequency_khz": 12111080,
+        "frequency_if_khz": 1433080,
+        "transport_stream_id": [
+            18256,
+            18257,
+            18258,
+            65535,
+            65535,
+            65535,
+            65535,
+            65535
+        ],
+        "has_lock": true
+    },
+    {
+        "transponder": "BS23",
+        "number": 23,
+        "frequency_idx": 11,
+        "frequency_khz": 12149440,
+        "frequency_if_khz": 1471440,
+        "transport_stream_id": [
+            18288,
+            18801,
+            18802,
+            18803,
+            65535,
+            65535,
+            65535,
+            65535
+        ],
+        "has_lock": true
+    },
+    {
+        "transponder": "ND2",
+        "number": 2,
+        "frequency_idx": 12,
+        "frequency_khz": 12291000,
+        "frequency_if_khz": 1613000,
+        "transport_stream_id": [
+            24608,
+            65535,
+            65535,
+            65535,
+            65535,
+            65535,
+            65535,
+            65535
+        ],
+        "has_lock": true
+    },
+    {
+        "transponder": "ND4",
+        "number": 4,
+        "frequency_idx": 13,
+        "frequency_khz": 12331000,
+        "frequency_if_khz": 1653000,
+        "transport_stream_id": [
+            28736,
+            65535,
+            65535,
+            65535,
+            65535,
+            65535,
+            65535,
+            65535
+        ],
+        "has_lock": true
+    },
+    {
+        "transponder": "ND6",
+        "number": 6,
+        "frequency_idx": 14,
+        "frequency_khz": 12371000,
+        "frequency_if_khz": 1693000,
+        "transport_stream_id": [
+            28768,
+            65535,
+            65535,
+            65535,
+            65535,
+            65535,
+            65535,
+            65535
+        ],
+        "has_lock": true
+    },
+    {
+        "transponder": "ND8",
+        "number": 8,
+        "frequency_idx": 15,
+        "frequency_khz": 12411000,
+        "frequency_if_khz": 1733000,
+        "transport_stream_id": [
+            24704,
+            65535,
+            65535,
+            65535,
+            65535,
+            65535,
+            65535,
+            65535
+        ],
+        "has_lock": true
+    },
+    {
+        "transponder": "ND10",
+        "number": 10,
+        "frequency_idx": 16,
+        "frequency_khz": 12451000,
+        "frequency_if_khz": 1773000,
+        "transport_stream_id": [
+            24736,
+            65535,
+            65535,
+            65535,
+            65535,
+            65535,
+            65535,
+            65535
+        ],
+        "has_lock": true
+    },
+    {
+        "transponder": "ND12",
+        "number": 12,
+        "frequency_idx": 17,
+        "frequency_khz": 12491000,
+        "frequency_if_khz": 1813000,
+        "transport_stream_id": [
+            28864,
+            65535,
+            65535,
+            65535,
+            65535,
+            65535,
+            65535,
+            65535
+        ],
+        "has_lock": true
+    },
+    {
+        "transponder": "ND14",
+        "number": 14,
+        "frequency_idx": 18,
+        "frequency_khz": 12531000,
+        "frequency_if_khz": 1853000,
+        "transport_stream_id": [
+            28896,
+            65535,
+            65535,
+            65535,
+            65535,
+            65535,
+            65535,
+            65535
+        ],
+        "has_lock": true
+    },
+    {
+        "transponder": "ND16",
+        "number": 16,
+        "frequency_idx": 19,
+        "frequency_khz": 12571000,
+        "frequency_if_khz": 1893000,
+        "transport_stream_id": [
+            28928,
+            65535,
+            65535,
+            65535,
+            65535,
+            65535,
+            65535,
+            65535
+        ],
+        "has_lock": true
+    },
+    {
+        "transponder": "ND18",
+        "number": 18,
+        "frequency_idx": 20,
+        "frequency_khz": 12611000,
+        "frequency_if_khz": 1933000,
+        "transport_stream_id": [
+            28960,
+            65535,
+            65535,
+            65535,
+            65535,
+            65535,
+            65535,
+            65535
+        ],
+        "has_lock": true
+    },
+    {
+        "transponder": "ND20",
+        "number": 20,
+        "frequency_idx": 21,
+        "frequency_khz": 12651000,
+        "frequency_if_khz": 1973000,
+        "transport_stream_id": [
+            28992,
+            65535,
+            65535,
+            65535,
+            65535,
+            65535,
+            65535,
+            65535
+        ],
+        "has_lock": true
+    },
+    {
+        "transponder": "ND22",
+        "number": 22,
+        "frequency_idx": 22,
+        "frequency_khz": 12691000,
+        "frequency_if_khz": 2013000,
+        "transport_stream_id": [
+            29024,
+            65535,
+            65535,
+            65535,
+            65535,
+            65535,
+            65535,
+            65535
+        ],
+        "has_lock": true
+    },
+    {
+        "transponder": "ND24",
+        "number": 24,
+        "frequency_idx": 23,
+        "frequency_khz": 12731000,
+        "frequency_if_khz": 2053000,
+        "transport_stream_id": [
+            29056,
+            65535,
+            65535,
+            65535,
+            65535,
+            65535,
+            65535,
+            65535
+        ],
+        "has_lock": true
+    }
+]
