@@ -1,0 +1,11 @@
+# DTV02-1T1S-U
+ACTION=="add", SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", \
+ATTRS{idVendor}=="0511", ATTRS{idProduct}=="004b", MODE="0664", GROUP="video"
+
+# PX-M1UR
+ACTION=="add", SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", \
+ATTRS{idVendor}=="0511", ATTRS{idProduct}=="0854", MODE="0664", GROUP="video"
+
+# Unknown
+ACTION=="add", SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", \
+ATTRS{idVendor}=="048d", ATTRS{idProduct}=="9306", MODE="0664", GROUP="video"
