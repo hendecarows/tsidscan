@@ -70,6 +70,13 @@ class Config:
         self._args = self.parse_args(desc, isdb_s, isdb_t)
         self._configs = vars(self._args)
 
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exception_type, exception_value, traceback):
+        self._args.input.close()
+        self._args.output.close()
+
     def _parse_ignores(self, tsids: str):
         for tsid in tsids.split(','):
             self._ignores.add(int(tsid, 0))
@@ -102,14 +109,14 @@ class Config:
             'input',
             help='input filename (stdin)',
             nargs='?',
-            type=argparse.FileType('r'),
+            type=argparse.FileType('r', encoding='utf-8'),
             default='-',
         )
         parser.add_argument(
             'output',
             help='output filename (stdout)',
             nargs='?',
-            type=argparse.FileType('w'),
+            type=argparse.FileType('w', encoding='utf-8'),
             default='-',
         )
 
@@ -263,26 +270,25 @@ class Channel:
 
 
 def main():
-    config = Config('make channel config command', isdb_s=True, isdb_t=False)
-    Logger.init(__name__, config.get('log_level'))
 
-    try:
-        results = json.load(config.read())
-
-        # ignore TSID
-        for r in results:
-            if r['has_lock'] == False:
-                continue
-            for idx, tsid in enumerate(r['transport_stream_id']):
-                if tsid == 0xffff:
+    with Config('make channel config command', isdb_s=True, isdb_t=False) as config:
+        Logger.init(__name__, config.get('log_level'))
+        try:
+            results = json.load(config.read())
+            # ignore TSID
+            for r in results:
+                if r['has_lock'] == False:
                     continue
-                if config.has_ignore_ts_id(tsid):
-                    r['transport_stream_id'][idx] = 0xffff
+                for idx, tsid in enumerate(r['transport_stream_id']):
+                    if tsid == 0xffff:
+                        continue
+                    if config.has_ignore_ts_id(tsid):
+                        r['transport_stream_id'][idx] = 0xffff
 
-        channel = Channel(config.write())
-        channel.dump(config.format(), results)
-    except Exception as e:
-        Logger.error(e)
+            channel = Channel(config.write())
+            channel.dump(config.format(), results)
+        except Exception as e:
+            Logger.error(e)
 
 
 if __name__ == '__main__':

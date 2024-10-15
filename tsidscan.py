@@ -130,6 +130,12 @@ class Config:
         self._args = self.parse_args(desc, isdb_s, isdb_t)
         self._configs = vars(self._args)
 
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exception_type, exception_value, traceback):
+        self._args.output.close()
+
     def parse_args(self, desc: str, isdb_s: bool=True, isdb_t: bool=True):
         parser = argparse.ArgumentParser(
             description=desc
@@ -182,7 +188,7 @@ class Config:
             'output',
             help='output filename (stdout)',
             nargs='?',
-            type=argparse.FileType('w'),
+            type=argparse.FileType('w', encoding='utf-8'),
             default='-',
         )
 
@@ -1912,9 +1918,6 @@ class StopEvent:
         return self._event_stop.is_set()
 
 def main():
-    config = Config('scan tsid command', isdb_s=True, isdb_t=False)
-    Logger.init(__name__, config.get('log_level'))
-
     # BS
     results = []
     for i in range(0, 12):
@@ -1947,20 +1950,23 @@ def main():
             }
         )
 
-    event = StopEvent()
-    with TunerDevice(config) as device:
-        device.open()
-        for r in results:
-            if event.is_set():
-                break
-            Logger.info('{} {}kHz'.format(r['transponder'], r['frequency_if_khz']))
-            try:
-                r['transport_stream_id'] = device.get_ts_ids(device.ISDB_S0, r['frequency_if_khz'])
-                r['has_lock'] = True
-            except Exception as e:
-                Logger.info(e)
+    with Config('scan tsid command', isdb_s=True, isdb_t=False) as config:
+        Logger.init(__name__, config.get('log_level'))
+        event = StopEvent()
+        with TunerDevice(config) as device:
+            device.open()
+            for r in results:
+                if event.is_set():
+                    break
+                Logger.info('{} {}kHz'.format(r['transponder'], r['frequency_if_khz']))
+                try:
+                    r['transport_stream_id'] = device.get_ts_ids(device.ISDB_S0, r['frequency_if_khz'])
+                    r['has_lock'] = True
+                except Exception as e:
+                    Logger.info(e)
 
-    json.dump(results, config.write(), indent=4)
+        json.dump(results, config.write(), indent=4)
+
 
 if __name__ == '__main__':
     try:
