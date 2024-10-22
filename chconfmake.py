@@ -171,102 +171,107 @@ class Channel:
         self._func[format](results)
 
     def _dump_dvbv5(self, results: json):
-        for r in results:
-            if r['has_lock'] == False:
-                continue
-            for idx, tsid in enumerate(r['transport_stream_id']):
-                if tsid == 0xffff:
+        for t in ('BS', 'CS'):
+            for r in results[t]:
+                if r['has_lock'] == False:
                     continue
-                if 'BS' in r['transponder']:
-                    self._file.write('[BS{:02d}_{}]\n'.format(r['number'], idx))
-                else:
-                    self._file.write('[CS{}]\n'.format(r['number']))
-                self._file.write('\tDELIVERY_SYSTEM = ISDBS\n')
-                self._file.write('\tFREQUENCY = {}\n'.format(r['frequency_if_khz']))
-                self._file.write('\tSTREAM_ID = {}\n'.format(tsid))
+                for idx, tsid in enumerate(r['transport_stream_id']):
+                    if tsid == 0xffff:
+                        continue
+                    if 'BS' in r['transponder']:
+                        self._file.write('[BS{:02d}_{}]\n'.format(r['number'], idx))
+                    else:
+                        self._file.write('[CS{}]\n'.format(r['number']))
+                    self._file.write('\tDELIVERY_SYSTEM = ISDBS\n')
+                    self._file.write('\tFREQUENCY = {}\n'.format(r['frequency_if_khz']))
+                    self._file.write('\tSTREAM_ID = {}\n'.format(tsid))
 
     def _dump_bondvb(self, results: json):
         bonch = 0
-        for r in results:
-            if r['has_lock'] == False:
-                continue
-            for idx, tsid in enumerate(r['transport_stream_id']):
-                if tsid == 0xffff:
+        for t in ('BS', 'CS'):
+            for r in results[t]:
+                if r['has_lock'] == False:
                     continue
-                data = []
-                if 'BS' in r['transponder']:
-                    data.append('BS{:02d}/TS{}'.format(r['number'], idx))
-                else:
-                    data.append('ND{:02d}'.format(r['number']))
-                data.append(str(bonch))
-                data.append(str(r['frequency_idx']))
-                data.append('0x{:04x}'.format(tsid))
-                self._file.write('\t'.join(data))
-                self._file.write('\n')
-                bonch += 1
+                for idx, tsid in enumerate(r['transport_stream_id']):
+                    if tsid == 0xffff:
+                        continue
+                    data = []
+                    if 'BS' in r['transponder']:
+                        data.append('BS{:02d}/TS{}'.format(r['number'], idx))
+                    else:
+                        data.append('ND{:02d}'.format(r['number']))
+                    data.append(str(bonch))
+                    data.append(str(r['frequency_idx']))
+                    data.append('0x{:04x}'.format(tsid))
+                    self._file.write('\t'.join(data))
+                    self._file.write('\n')
+                    bonch += 1
 
 
     def _dump_bonpt(self, results: json):
         bonch = 0
-        for r in results:
-            if r['has_lock'] == False:
-                continue
-            for idx, tsid in enumerate(r['transport_stream_id']):
-                if tsid == 0xffff:
+        for t in ('BS', 'CS'):
+            for r in results[t]:
+                if r['has_lock'] == False:
                     continue
-                data = []
-                if 'BS' in r['transponder']:
-                    data.append('BS{:02d}/TS{}'.format(r['number'], idx))
-                else:
-                    data.append('ND{:02d}'.format(r['number']))
-                data.append(str(bonch))
-                data.append(str(r['frequency_idx']))
-                data.append(str(idx))
-                self._file.write('\t'.join(data))
-                self._file.write('\n')
-                bonch += 1
+                for idx, tsid in enumerate(r['transport_stream_id']):
+                    if tsid == 0xffff:
+                        continue
+                    data = []
+                    if 'BS' in r['transponder']:
+                        data.append('BS{:02d}/TS{}'.format(r['number'], idx))
+                    else:
+                        data.append('ND{:02d}'.format(r['number']))
+                    data.append(str(bonch))
+                    data.append(str(r['frequency_idx']))
+                    data.append(str(idx))
+                    self._file.write('\t'.join(data))
+                    self._file.write('\n')
+                    bonch += 1
 
     def _dump_bonptx(self, results: json):
         bonch = 0
-        for r in results:
-            if r['has_lock'] == False:
-                continue
-            for idx, tsid in enumerate(r['transport_stream_id']):
-                if tsid == 0xffff:
+        for t in ('BS', 'CS'):
+            for r in results[t]:
+                if r['has_lock'] == False:
                     continue
-                data = []
-                if 'BS' in r['transponder']:
-                    data.append('Ch{}=BS{:02d}/TS{}'.format(bonch, r['number'], idx))
-                    data.append(str(r['frequency_idx']))
-                    data.append(str(idx))
-                    self._file.write(','.join(data))
-                    self._file.write('\n')
-                    bonch += 1
+                for idx, tsid in enumerate(r['transport_stream_id']):
+                    if tsid == 0xffff:
+                        continue
+                    data = []
+                    if 'BS' in r['transponder']:
+                        data.append('Ch{}=BS{:02d}/TS{}'.format(bonch, r['number'], idx))
+                        data.append(str(r['frequency_idx']))
+                        data.append(str(idx))
+                        self._file.write(','.join(data))
+                        self._file.write('\n')
+                        bonch += 1
 
     def _dump_bonpx4(self, results: json):
         bonchbs = 0
         bonchcs = 0
-        for r in results:
-            if r['has_lock'] == False:
-                continue
-            for idx, tsid in enumerate(r['transport_stream_id']):
-                if tsid == 0xffff:
+        for t in ('BS', 'CS'):
+            for r in results[t]:
+                if r['has_lock'] == False:
                     continue
-                data = []
-                if 'BS' in r['transponder']:
-                    data.append('BS{:02d}/TS{}'.format(r['number'], idx))
-                    data.append('0')
-                    data.append(str(bonchbs))
-                    bonchbs += 1
-                else:
-                    data.append('ND{:02d}'.format(r['number']))
-                    data.append('1')
-                    data.append(str(bonchcs))
-                    bonchcs += 1
-                data.append(str(r['frequency_idx']))
-                data.append(str(tsid))
-                self._file.write('\t'.join(data))
-                self._file.write('\n')
+                for idx, tsid in enumerate(r['transport_stream_id']):
+                    if tsid == 0xffff:
+                        continue
+                    data = []
+                    if 'BS' in r['transponder']:
+                        data.append('BS{:02d}/TS{}'.format(r['number'], idx))
+                        data.append('0')
+                        data.append(str(bonchbs))
+                        bonchbs += 1
+                    else:
+                        data.append('ND{:02d}'.format(r['number']))
+                        data.append('1')
+                        data.append(str(bonchcs))
+                        bonchcs += 1
+                    data.append(str(r['frequency_idx']))
+                    data.append(str(tsid))
+                    self._file.write('\t'.join(data))
+                    self._file.write('\n')
 
 
 def main():
@@ -276,14 +281,15 @@ def main():
         try:
             results = json.load(config.read())
             # ignore TSID
-            for r in results:
-                if r['has_lock'] == False:
-                    continue
-                for idx, tsid in enumerate(r['transport_stream_id']):
-                    if tsid == 0xffff:
+            for t in ('BS', 'CS'):
+                for r in results[t]:
+                    if r['has_lock'] == False:
                         continue
-                    if config.has_ignore_ts_id(tsid):
-                        r['transport_stream_id'][idx] = 0xffff
+                    for idx, tsid in enumerate(r['transport_stream_id']):
+                        if tsid == 0xffff:
+                            continue
+                        if config.has_ignore_ts_id(tsid):
+                            r['transport_stream_id'][idx] = 0xffff
 
             channel = Channel(config.write())
             channel.dump(config.format(), results)

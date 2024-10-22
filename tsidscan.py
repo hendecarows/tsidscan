@@ -1919,11 +1919,11 @@ class StopEvent:
 
 def main():
     # BS
-    results = []
+    results = {'BS':[], 'CS':[]}
     for i in range(0, 12):
         tpnum = 2 * i + 1
         freq = 1049480 + 38360 * i
-        results.append(
+        results['BS'].append(
             {
                 'transponder': 'BS{}'.format(tpnum),
                 'number': tpnum,
@@ -1938,7 +1938,7 @@ def main():
     for i in range(0, 12):
         tpnum = 2 * i + 2
         freq = 1613000 + 40000 * i
-        results.append(
+        results['CS'].append(
             {
                 'transponder': 'ND{}'.format(tpnum),
                 'number': tpnum,
@@ -1955,15 +1955,16 @@ def main():
         event = StopEvent()
         with TunerDevice(config) as device:
             device.open()
-            for r in results:
-                if event.is_set():
-                    break
-                Logger.info('{} {}kHz'.format(r['transponder'], r['frequency_if_khz']))
-                try:
-                    r['transport_stream_id'] = device.get_ts_ids(device.ISDB_S0, r['frequency_if_khz'])
-                    r['has_lock'] = True
-                except Exception as e:
-                    Logger.info(e)
+            for t in ('BS', 'CS'):
+                for r in results[t]:
+                    if event.is_set():
+                        break
+                    Logger.info('{} {}kHz'.format(r['transponder'], r['frequency_if_khz']))
+                    try:
+                        r['transport_stream_id'] = device.get_ts_ids(device.ISDB_S0, r['frequency_if_khz'])
+                        r['has_lock'] = True
+                    except Exception as e:
+                        Logger.info(e)
 
         json.dump(results, config.write(), indent=4)
 
